@@ -38,3 +38,15 @@ html {
     -moz-box-shadow: -1px 1.5px 9.5px 9px #aaa;
     box-shadow: -1px 1.5px 9.5px 9px #aaa;
 }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}

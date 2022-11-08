@@ -7,12 +7,37 @@
         </h1>
     </div>
 
+
+    {{-- we will log the errors in alert if need to --}}
+
+
+    @if($errors->any())
+
+        @php
+            $arr = array();
+        @endphp
+
+    @foreach($errors as $error)
+        array_push($arr , $error);
+    @endforeach
+    <script>
+        var errors = @php print_r($arr); @endphp
+
+
+
+        console.log(errors)
+
+        alert(errors)
+    </script>
+    @endif
+
     {{-- the conteiner of regijster form --}}
 
-    <div class="conteiner-fluid py-2 px-1 px-md-3 px-lg-5 mt-4">
+    <div class="conteiner-fluid py-2 px-2 px-md-3 px-lg-5 mt-4">
         <div class="w-100 bg-danger rounded bg-light py-3 form-container" style="min-height: 80vh;">
-            <form class="w-100 m-0 form-floating">
-                <div class="w-100 row">
+            <form class="w-100 m-0 form-floating" method="post" action="{{route('register')}}">
+                @csrf
+                <div class="w-100 row m-0">
                     <div class="personal-info p-2 col-lg-6  px-lg-5 border-end">
                         <div class="w-100 py-2 text-center">
                             <h2 class="text-primary h3">
@@ -27,14 +52,9 @@
                             <input type="text" class="form-control rounded" id="fname" placeholder="first name">
                             <label for="fname"> <i class="fas fa-user"></i> last name</label>
                         </div>
-                        <div class="form-floating">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                                <option selected>Algeria</option>
-                                <option value="1">Morocco</option>
-                                <option value="2">Tunisie</option>
-                                <option value="3">Libinon</option>
-                            </select>
-                            <label for="floatingSelect">select your country</label>
+                        <div class="form-floating my-3">
+                            <input type="password" class="form-control rounded" id="pass" placeholder="first name">
+                            <label for="pass"> <i class="fas fa-lock"></i> password</label>
                         </div>
                         <span class="fw-bold mt-4 d-block">
                             tour date of birth :
@@ -83,31 +103,12 @@
                             <label for="floatingSelect">select your country</label>
                         </div>
                         <div class="form-floating my-3">
-                            <input type="text" class="form-control rounded" id="fname" placeholder="first name">
+                            <input type="number" class="form-control rounded" id="fname" placeholder="first name">
                             <label for="fname"> <i class="fas fa-phone"></i> phone number</label>
                         </div>
-                        <span class="fw-bold mt-4 d-block">
-                            tour date of birth :
-                        </span>
-                        <div class="row w-100 m-0">
-                            <div class="col-3 text-center">
-                                <div class="form-floating my-3">
-                                    <input type="text" class="form-control rounded" id="dob" placeholder="first name">
-                                    <label for="dob">dd</label>
-                                </div>
-                            </div>
-                            <div class="col-3">
-                                <div class="form-floating my-3">
-                                    <input type="text" class="form-control rounded" id="mob" placeholder="first name">
-                                    <label for="mob">mm</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-floating my-3">
-                                    <input type="text" class="form-control rounded" id="yob" placeholder="first name">
-                                    <label for="yob">yyyy</label>
-                                </div>
-                            </div>
+
+                        <div class="w-100 mt-5 text-center py-2 border-top">
+                            already registered ? <a class="nav-link" href="{{route('login')}}">Login</a>
                         </div>
                     </div>
                 </div>
