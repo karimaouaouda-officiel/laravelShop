@@ -59,7 +59,18 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    //define the relationships
+
     public function shop(){
         return $this->hasOne(Shop::class);
+    }
+
+    public function rates(){
+        return $this->hasMany(Rate::class);
+    }
+
+
+    public function comments(){
+        return $this->hasMany(Rate::class);
     }
 }

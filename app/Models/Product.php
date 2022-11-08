@@ -13,4 +13,13 @@ class Product extends Model
     public function shop(){
         return $this->belongsTo(Shop::class);
     }
+
+
+    public function rates(){
+        return $this->hasMany(Rate::class);
+    }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }

@@ -1,0 +1,40 @@
+body,
+html {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    scroll-behavior: smooth;
+}
+
+#app {
+    background: linear-gradient(#ff5200, #d6361c);
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.nav-item {
+    position: relative;
+    color: azure !important;
+}
+
+.nav-item::after {
+    content: '';
+    width: 0px;
+    position: absolute;
+    bottom: 0px;
+    background-color: white;
+    height: 2px;
+    transition: .5s;
+}
+
+.nav-item:hover::after {
+    width: 100%;
+}
+
+.form-container {
+    -webkit-box-shadow: -1px 1.5px 9.5px 9px #aaa;
+    -moz-box-shadow: -1px 1.5px 9.5px 9px #aaa;
+    box-shadow: -1px 1.5px 9.5px 9px #aaa;
+}

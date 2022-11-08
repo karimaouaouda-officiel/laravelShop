@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('shop_id')->constrained();
+            $table->string('name');
+            $table->sting('description');
+            $table->float('price');
             $table->timestamps();
         });
     }
