@@ -24,9 +24,14 @@ class User extends Authenticatable
      * @var string[]
      */
     protected $fillable = [
-        'name',
+        'firstname',
+        'lastname',
         'email',
         'password',
+        'country',
+        'role',
+        'phone_number',
+        'date_of_birth',
     ];
 
     /**
@@ -61,8 +66,12 @@ class User extends Authenticatable
 
     //define the relationships
 
-    public function shop(){
-        return $this->hasOne(Shop::class);
+    public function favorites(){
+        return $this->hasMany(Favorites::class);
+    }
+
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
 
     public function rates(){

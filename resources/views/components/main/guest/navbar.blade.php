@@ -29,7 +29,7 @@
                 </li>
             </ul>
 
-            <a href="#" class="btn btn-danger border border-light text-white fw-bold" style="width: max-content;margin:0 auto">
+            <a href="{{route('register')}}" class="btn btn-danger border border-light text-white fw-bold" style="width: max-content;margin:0 auto">
                 <i class="fa-solid fa-cart-shopping mx-2"></i>
                 <span style="letter-spacing: 1px;">
                     start shopping now !

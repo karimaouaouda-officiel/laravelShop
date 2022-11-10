@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('rapports', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
+            $table->integer('product_id');
+            $table->text('rapport');
             $table->timestamps();
         });
     }

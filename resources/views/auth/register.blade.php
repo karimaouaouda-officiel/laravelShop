@@ -13,15 +13,16 @@
 
     @if($errors->any())
 
-        @php
-            $arr = array();
-        @endphp
+    @php
+    $arr = array();
+    @endphp
 
     @foreach($errors as $error)
-        array_push($arr , $error);
+    array_push($arr , $error);
     @endforeach
     <script>
-        var errors = @php print_r($arr); @endphp
+        var errors = @php print_r($arr);
+        @endphp
 
 
 
@@ -37,6 +38,8 @@
         <div class="w-100 bg-danger rounded bg-light py-3 form-container" style="min-height: 80vh;">
             <form class="w-100 m-0 form-floating" method="post" action="{{route('register')}}">
                 @csrf
+
+                <input type="hidden" value="{{request()->get('role') ?? 'client'}}" name="role">
                 <div class="w-100 row m-0">
                     <div class="personal-info p-2 col-lg-6  px-lg-5 border-end">
                         <div class="w-100 py-2 text-center">
@@ -45,18 +48,29 @@
                             </h2>
                         </div>
                         <div class="form-floating">
-                            <input type="text" class="form-control rounded" id="fname" placeholder="first name">
+                            <input name="firstname" type="text" class="form-control rounded" id="fname" placeholder="first name">
                             <label for="fname"> <i class="fas fa-user"></i> first name</label>
                         </div>
                         <div class="form-floating my-3">
-                            <input type="text" class="form-control rounded" id="fname" placeholder="first name">
+                            <input type="text" name="lastname" class="form-control rounded" id="lname" placeholder="first name">
                             <label for="fname"> <i class="fas fa-user"></i> last name</label>
                         </div>
+                        <div class="form-floating mb-3">
+                            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                            <label for="floatingInput">
+                                <i class="fas fa-envelope"></i>
+                                Email address
+                            </label>
+                        </div>
                         <div class="form-floating my-3">
-                            <input type="password" class="form-control rounded" id="pass" placeholder="first name">
+                            <input type="password" name="password" class="form-control rounded" id="pass" placeholder="password">
                             <label for="pass"> <i class="fas fa-lock"></i> password</label>
                         </div>
-                        <span class="fw-bold mt-4 d-block">
+                        <div class="form-floating my-3">
+                            <input type="password" name="password_confirmation" class="form-control rounded" id="pass" placeholder="first name">
+                            <label for="pass"> <i class="fas fa-lock"></i> password confirmation</label>
+                        </div>
+                        <!--<span class="fw-bold mt-4 d-block">
                             tour date of birth :
                         </span>
                         <div class="row w-100 m-0">
@@ -79,22 +93,18 @@
                                 </div>
                             </div>
                         </div>
+-->
                     </div>
+
+                    @if(request()->get('role') == "seller")
                     <div class="personal-info p-2 col-lg-6  px-lg-5 border-end">
                         <div class="w-100 py-2 text-center">
                             <h2 class="text-primary h3">
                                 Contact informations
                             </h2>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-                            <label for="floatingInput">
-                                <i class="fas fa-envelope"></i>
-                                Email address
-                            </label>
-                        </div>
                         <div class="form-floating">
-                            <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                            <select name="country" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                                 <option selected>Algeria</option>
                                 <option value="1">Morocco</option>
                                 <option value="2">Tunisie</option>
@@ -103,7 +113,7 @@
                             <label for="floatingSelect">select your country</label>
                         </div>
                         <div class="form-floating my-3">
-                            <input type="number" class="form-control rounded" id="fname" placeholder="first name">
+                            <input type="number" name="phone_number" class="form-control rounded" id="phone" placeholder="first name">
                             <label for="fname"> <i class="fas fa-phone"></i> phone number</label>
                         </div>
 
@@ -111,6 +121,22 @@
                             already registered ? <a class="nav-link" href="{{route('login')}}">Login</a>
                         </div>
                     </div>
+
+                    @else
+
+                    <div class=" col-lg-6 h-100">
+                        <img class="w-100" style="max-height: 60vh;" src="{{asset('./media/reg.svg')}}" alt="">
+                        <div class="py-2 px-3 text-center">
+                            <p class="h6">
+                                already have an account? <a class="text-primary" href="{{route('login')}}">Login</a> now
+                            </p>
+                            <p class="h6">
+                                want to register a a buyer? <a class="text-primary" href="{{route('register' , ['role'=>'seller' ?? 'client'])}}">click here</a>
+                            </p>
+                        </div>
+                    </div>
+
+                    @endif
                 </div>
                 <div class="w-100 d-flex justify-content-center py-2">
                     <button class="btn btn-primary" style="letter-spacing: 1.5px;text-transform:uppercase">

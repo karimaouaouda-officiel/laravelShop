@@ -10,11 +10,6 @@ class Product extends Model
     use HasFactory;
 
 
-    public function shop(){
-        return $this->belongsTo(Shop::class);
-    }
-
-
     public function rates(){
         return $this->hasMany(Rate::class);
     }
