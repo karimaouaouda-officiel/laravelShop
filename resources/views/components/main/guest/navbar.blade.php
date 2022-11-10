@@ -29,12 +29,44 @@
                 </li>
             </ul>
 
+            @if(Auth::check())
+
+            <div class=" dropdown">
+                <button class="btn btn-danger border-light dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    options
+                </button>
+                <ul class="dropdown-menu">
+                    <div class="block px-4 py-2 text-xs text-gray-400">
+                        {{ __('Manage Account') }}
+                    </div>
+                    <li><a href="{{ route('dashboard') }}" class="dropdown-item" href="#">
+                            dashboard
+                        </a></li>
+                    <li><a href="{{ route('profile.show') }}" class="dropdown-item" href="#">
+                            update profile
+                        </a></li>
+
+                    <div class="border-t border-gray-100"></div>
+
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}" x-data>
+                        @csrf
+
+                        <x-jet-dropdown-link class="text-danger fw-bold" href="{{ route('logout') }}" @click.prevent="$root.submit();">
+                            {{ __('Log Out') }}
+                        </x-jet-dropdown-link>
+                    </form>
+                </ul>
+            </div>
+
+            @else
             <a href="{{route('register')}}" class="btn btn-danger border border-light text-white fw-bold" style="width: max-content;margin:0 auto">
                 <i class="fa-solid fa-cart-shopping mx-2"></i>
                 <span style="letter-spacing: 1px;">
                     start shopping now !
                 </span>
             </a>
+            @endif
         </div>
     </div>
 </nav>
