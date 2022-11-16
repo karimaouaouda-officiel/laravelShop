@@ -7,7 +7,7 @@ html {
 }
 
 #app {
-    background: linear-gradient(#ff5200, #d6361c);
+    background: linear-gradient(#f5f5f5, #f87676);
     width: 100%;
     height: 100vh;
     overflow-x: hidden;
@@ -49,4 +49,43 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
     -moz-appearance: textfield;
+}
+
+
+
+.tools ul>li:hover{
+    background-color: #a9a39f;
+    cursor: pointer;
+}
+
+a{
+    text-decoration: none;
+}
+
+.tools{
+    top: 15vh;
+    left:0px;
+    width:39px;
+    overflow: hidden;
+    transition: .5s;
+}
+
+.tools i{
+    color: black;
+    transition: .5s;
+} 
+.tools li span{
+    white-space: nowrap;
+}
+
+.shown{
+    width: 320px;
+}
+
+.shown .tools-toggler i{
+    transform: rotate(0.5turn);
+}
+
+.tools ul li:not(:last-child){
+    border-bottom: 1px solid #aaa ;
 }

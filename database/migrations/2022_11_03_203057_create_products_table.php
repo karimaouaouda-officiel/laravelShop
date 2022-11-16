@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
+    /** 
      * Run the migrations.
      *
      * @return void
@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('shop_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->string('description');
             $table->float('price');
+            $table->string('statut')->default("waiting");
+            $table->text("pic_path");
             $table->timestamps();
         });
     }

@@ -34,6 +34,10 @@ class CreateNewUser implements CreatesNewUsers
             ]);
         } 
 
+        if($input['role'] != "admin" && $input['role'] != "seller"){
+            $input['role'] = "client";
+        }
+
         return User::create([
             'firstname'    => $input['firstname'],
             'lastname'     => $input['lastname'],

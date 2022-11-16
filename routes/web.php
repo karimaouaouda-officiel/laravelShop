@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,4 +26,15 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
+});
+
+
+//define routes tha will be passed automatically to productController
+Route::controller(ProductController::class)->group(function(){
+
+    //add new product
+    Route::post('/addNewProduct' , 'store')->name('add');
+
+    Route::post('/removeProduct' , 'delProduct')->name('remove');
+
 });
