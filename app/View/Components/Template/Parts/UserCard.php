@@ -11,9 +11,11 @@ class UserCard extends Component
      *
      * @return void
      */
-    public function __construct()
+
+    public $user;
+    public function __construct($user = NULL)
     {
-        //
+        $this->user = $user;
     }
 
     /**

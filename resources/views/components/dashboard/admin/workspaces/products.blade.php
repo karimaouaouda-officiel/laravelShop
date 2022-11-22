@@ -174,9 +174,19 @@
             $("#viewModal .modal-body").html(`
                 <h4 class="text-primary fw-bold py-3 px-2">product : </h4>
                 <x-template.parts.product/>
+                <h4 class="text-primary fw-bold py-3 px-2">product seller : </h4>
+                <x-template.parts.user-card/>
             `)
             $("#viewModal #productName").text(p.name);
             $("#viewModal #productDescription").text(p.description);
+            console.log(p)
+            $("#viewModal .user-card #userName").text(`${p.user.firstname} ${p.user.lastname}`);
+            $("#viewModal .user-card #userRole").text(p.user.role);
+            $("#viewModal .user-card #userPhone").text(p.user.phone_number == "-1" ? "no number" : p.user.phone_number);
+            $("#viewModal .user-card #userEmail").text(p.user.email);
+            $("#viewModal .user-card #userCountry").text(p.user.country == "" ? "no country" : p.user.country);
+            $("#viewModal .user-card #userValidity").text("perfect");
+            $("#viewModal .user-card #chatBtn").attr('href' , `{{route('getProducts')}}/?user=${p.user.id}`);
         })
 
     })

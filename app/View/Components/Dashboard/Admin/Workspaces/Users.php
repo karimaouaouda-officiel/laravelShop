@@ -2,7 +2,9 @@
 
 namespace App\View\Components\Dashboard\Admin\Workspaces;
 
+use App\Models\User;
 use Illuminate\View\Component;
+
 
 class Users extends Component
 {
@@ -11,9 +13,11 @@ class Users extends Component
      *
      * @return void
      */
+
+    public $users;
     public function __construct()
     {
-        //
+        $this->users = User::all();
     }
 
     /**

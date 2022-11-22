@@ -15,10 +15,10 @@
             </a>
         </li>
         <li class="w-100 py-2 bg-warnin">
-            <a class="w-100 h-100 d-grid" style="grid-template-columns: 35px auto;" href="{{route('dashboard',['workspace'=>'view'])}}">
+            <a class="w-100 h-100 d-grid" style="grid-template-columns: 35px auto;" href="{{route('dashboard',['workspace'=>'users'])}}">
                 <i class="fas fa-eye text-center w-100" style="height:35px;line-height:35px"></i>
                 <span class="d-block w-100 h-100 fw-bold px-2" style="line-height:35px">
-                    view products
+                    view users
                 </span>
             </a>
         </li>

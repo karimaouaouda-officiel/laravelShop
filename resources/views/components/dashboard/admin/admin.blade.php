@@ -9,6 +9,9 @@
                 @case("view")
                     <x-dashboard.admin.workspaces.products/>
                 @break
+                @case("users")
+                    <x-dashboard.admin.workspaces.users/>
+                @break
                 @case("satistiques")
                     <x-dashboard.admin.workspaces.satistiques/>
                 @break

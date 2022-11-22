@@ -98,7 +98,7 @@ a {
     this section is about the card of product
 */
 
-.product-card {
+.product-card{
     width: 250px;
     height: 75vh;
 }
@@ -128,6 +128,25 @@ a {
     color: white;
 }
 
+.user-card{
+    width: 350px;
+}
+.user-card .profile{
+    width: calc(350px * 0.5);
+    height: calc(350px * 0.5);
+}
+.user-card .user-name{
+    text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
+}
+
+.user-card .user-info i{
+    width: 2rem;
+    height: 2rem;
+    line-height: 2rem;
+}
+.user-card .user-info span{
+    line-height: 2rem;
+}
 
 @media only screen and (min-width : 992px) {
     .product-card {
