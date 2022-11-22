@@ -2,9 +2,19 @@
     <x-main.guest.navbar/>
 
 
-    @if(Auth::user()->role == "seller")
+    {{ Auth::user()->role }}
+
+    @switch(Auth::user()->role)
+    @case("seller")
         <x-dashboard.seller/>
-    @else
+    @break
+
+    @case("admin")
+        <x-dashboard.admin.admin/>
+    @break
+
+    @default
         <x-dashboard.client/>
-    @endif
+    @break
+    @endswitch
 </x-template.guest>

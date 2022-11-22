@@ -136,9 +136,19 @@ class ProductController extends Controller
         $product  = Product::find($req->input('id'));
 
         $product->delete();
-        return json_encode([
-            'message' => $product->name." was deleted successfully" 
-        ]);
+
+        return Product::all()->load('user')->toJson();
+    }
+
+    public function getProducts(Request $req){
+        if($req->get('statut')!=null && ($req->get('statut') == 'publiched' || $req->get('statut') == 'waiting')){
+            $all = Product::all()->where('statut' , '=' , $req->get('statut'))->load('user');
+        }else{
+            $all = Product::all()->load('user');
+        }
+
+
+        return $all->toJson();
     }
 
     /**

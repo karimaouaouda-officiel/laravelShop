@@ -37,4 +37,6 @@ Route::controller(ProductController::class)->group(function(){
 
     Route::post('/removeProduct' , 'delProduct')->name('remove');
 
+    Route::get('/getProducts' , 'getProducts')->name('getProducts');
+
 });

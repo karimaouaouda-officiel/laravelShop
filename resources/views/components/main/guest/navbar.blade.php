@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg" style="min-height: 8vh;background:#ff5200;">
+<nav class="navbar navbar-expand-lg" style="min-height: 8vh;">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-light" href="#">
+        <a class="navbar-brand fw-bold text-primary" href="#">
             LaravelShop
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -60,7 +60,7 @@
             </div>
 
             @else
-            <a href="{{route('register')}}" class="btn btn-danger border border-light text-white fw-bold" style="width: max-content;margin:0 auto">
+            <a href="{{route('register')}}" class="btn btn-light border border-secondary text-primary fw-bold" style="width: max-content;margin:0 auto">
                 <i class="fa-solid fa-cart-shopping mx-2"></i>
                 <span style="letter-spacing: 1px;">
                     start shopping now !

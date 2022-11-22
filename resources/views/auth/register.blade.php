@@ -2,7 +2,7 @@
 
     {{-- This is a comment from laravel --}}
     <div class="controle-fluid py-2">
-        <h1 class="display-6 fw-bold text-light text-center" style="text-transform: uppercase;letter-spacing:2px">
+        <h1 class="display-6 fw-bold text-primary text-center" style="text-transform: uppercase;letter-spacing:2px">
             Join us !
         </h1>
     </div>
