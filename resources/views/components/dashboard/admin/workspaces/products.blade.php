@@ -31,7 +31,6 @@
         </tbody>
     </table>
 
-
     {{-- modal for description --}}
     <!-- Button trigger modal -->
 
@@ -53,6 +52,39 @@
         </div>
     </div>
 
+
+    {{-- check modal --}}
+    <div class="modal fade" id="checkModal" tabindex="-1" aria-labelledby="descModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="descModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="desc">
+                    <form class="w-100" action="{{route('check')}}" method="POST" onsubmit="false" id="checkForm">
+                        @csrf
+                        <input type="hidden" name="product_id" id="productId">
+                        <div class="form-floating my-3">
+                            <input type="number" name="new_price" class="form-control rounded" id="price" placeholder="new price">
+                            <label for="pass"> <i class="fas fa-usd"></i> new price </label>
+                        </div>
+                        <div class="py-2 d-flex w-100 justify-content-center">
+                            <button id="publichBtn" type="button" class="btn btn-primary">
+                                publish
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- end modal  --}}
+
     <div class="modal fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -61,7 +93,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body d-flex justify-content-center flex-column align-items-center" id="view">
-                    
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -93,8 +125,8 @@
                     <button class="btn btn-danger rmproduct" id="${product.id}">
                         <i class="fas fa-times"></i>
                     </button>
-                    <button class="btn btn-success publich" id="${product.id}">
-                        <i class="fas fa-check"></i>
+                    <button class="btn btn-success publich" data-bs-toggle="modal" data-bs-target="#checkModal" id="${product.id}">
+                        ${product.statut == "waiting" ? '<i class="fas fa-check"></i>' : '<i class="fas fa-pen"></i>'}
                     </button>
                     <button class="btn btn-secondary view-product" data-bs-toggle="modal" data-bs-target="#viewModal" data-product="${product.id}">
                         <i class="fas fa-eye"></i>
@@ -104,7 +136,7 @@
         }
 
 
-        $('#descModal').on('show.bs.modal',function(e){
+        $('#descModal').on('show.bs.modal', function(e) {
             let text = e.relatedTarget.dataset.desc
             $('#descModal #desc p').text(text)
         })
@@ -115,6 +147,24 @@
                     $('table tbody').append(tr(product))
                 }
             });
+
+            $('.rmproduct').click(function() {
+                let id = $(this).attr('id')
+
+                let data = new FormData
+                data.set("id", id);
+                data.set("_token", "{{csrf_token()}}")
+
+                fetch("{{route('remove')}}", {
+                        method: "POST",
+                        body: data
+                    }).then(response => response.json())
+                    .then(json => {
+                        alert('succes')
+                        localStorage.setItem('products', json)
+                        $(this).parent().parent().remove()
+                    })
+            })
         }
         $(document).ready(function() {
             let fdata = new FormData
@@ -145,32 +195,16 @@
             </tr>`);
             laodTable(JSON.parse(localStorage.getItem('products')), $(this).val())
         })
-        $('.rmproduct').click(function() {
-            let id = $(this).attr('id')
-
-            let data = new FormData
-            data.set("id", id);
-            data.set("_token", "{{csrf_token()}}")
-
-            fetch("{{route('remove')}}", {
-                    method: "POST",
-                    body: data
-                }).then(response => response.json())
-                .then(json => {
-                    localStorage.setItem('products', json)
-                    $(this).parent().parent().remove()
-                })
-        })
-        $('#viewModal').on('show.bs.modal' , function(e){
+        $('#viewModal').on('show.bs.modal', function(e) {
             let id = e.relatedTarget.dataset.product
             let json = JSON.parse(localStorage.getItem('products'))
             let p;
-            for(let product of json){
-                if(product.id == id){
+            for (let product of json) {
+                if (product.id == id) {
                     p = product
                 }
             }
-            
+
             $("#viewModal .modal-body").html(`
                 <h4 class="text-primary fw-bold py-3 px-2">product : </h4>
                 <x-template.parts.product/>
@@ -186,7 +220,50 @@
             $("#viewModal .user-card #userEmail").text(p.user.email);
             $("#viewModal .user-card #userCountry").text(p.user.country == "" ? "no country" : p.user.country);
             $("#viewModal .user-card #userValidity").text("perfect");
-            $("#viewModal .user-card #chatBtn").attr('href' , `{{route('getProducts')}}/?user=${p.user.id}`);
+            $("#viewModal .user-card #chatBtn").attr('href', `{{route('getProducts')}}/?user=${p.user.id}`);
+        })
+
+        $("#checkModal").on('show.bs.modal', function(e) {
+            let id = e.relatedTarget.id;
+
+            $("#productId").val(id);
+        })
+
+        $("#publichBtn").click(function() {
+            let formdata = new FormData(document.querySelector("#checkForm"))
+            fetch("{{route('check')}}", {
+                    method: "POST",
+                    body: formdata
+                }).then(res => res.json())
+                .then(json => {
+                    alert(json.message);
+                    products = localStorage.getItem('products')
+                    products = JSON.parse(products)
+
+                    for (let product of products) {
+                        if ("" + product.id == $("#productId").val()) {
+                            product.statut = "published";
+                            product.price = $("input[name=new_price]").val()
+                            break;
+                        }
+                    }
+                    $("table tbody").html(`<tr>
+                <th>
+                    product name
+                </th>
+                <th>
+                    price
+                </th>
+                <th>
+                    description
+                </th>
+                <th>
+                    actions
+                </th>
+            </tr>`)
+                    laodTable(products, $("#filter").val());
+                    document.querySelector("#checkForm").reset()
+                })
         })
 
     })

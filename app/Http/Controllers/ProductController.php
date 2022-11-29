@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Testing\MimeType;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
@@ -23,6 +24,22 @@ class ProductController extends Controller
     public function index()
     {
         //
+    }
+
+    public function check(Request $request){
+        $request->validate([
+            'new_price' => "required",
+            'product_id' => "required"
+        ]);
+
+        $product = Product::find($request->input('product_id'));
+
+        $product->price = $request->input('new_price');
+        $product->statut = "published";
+
+        $product->save();
+
+        return ['message' => 'successfully edited'];
     }
 
     /**
@@ -160,5 +177,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         
+    }
+
+
+
+    public function discover(){
+        $data = DB::table('products')->where('statut' , "=" , 'waiting')->paginate(10 , ['*'] , 'discover' , null);
+        return view('discover' , compact('data'));
     }
 }

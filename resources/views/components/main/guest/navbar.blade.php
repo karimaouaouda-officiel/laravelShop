@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg" style="min-height: 8vh;">
     <div class="container-fluid">
-        <a class="navbar-brand fw-bold text-primary" href="#">
+        <a class="navbar-brand fw-bold text-primary" href="{{route('home')}}">
             LaravelShop
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,24 +9,18 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav w-75 justify-content-around">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{route('home')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#">Features</a>
+                    <a class="nav-link " href="{{route('about')}}">about us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
+                    <a class="nav-link" href="{{route('discover')}}">discover</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dropdown link
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('contact')}}">contact us</a>
                 </li>
+                
             </ul>
 
             @if(Auth::check())

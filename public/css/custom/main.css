@@ -98,25 +98,43 @@ a {
     this section is about the card of product
 */
 
-.product-card{
+.product-card {
     width: 250px;
     height: 75vh;
 }
 
-.product-card img{
+.product-card img {
     max-height: 35vh;
 }
 
-.product-card p{
+.product-card p {
     max-height: 20vh;
 }
 
-.product-card .image-container::after{
+.some-products h4 {
+    line-height: 3rem;
+    border-radius: 3rem;
+    width: fit-content;
+    position: relative;
+    letter-spacing: 1.5px;
+}
+
+.some-products::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    border-radius: .2rem;
+    padding: .1rem 0rem;
+    background-color: dodgerblue;
+    z-index: 0;
+}
+
+.product-card .image-container::after {
     content: attr(data-price);
     position: absolute;
     background-color: dodgerblue;
-    top : 0px;
-    left : 0px;
+    top: 0px;
+    left: 0px;
     height: 1.6rem;
     width: 6.5rem;
     z-index: 999;
@@ -128,23 +146,26 @@ a {
     color: white;
 }
 
-.user-card{
+.user-card {
     width: 350px;
 }
-.user-card .profile{
+
+.user-card .profile {
     width: calc(350px * 0.5);
     height: calc(350px * 0.5);
 }
-.user-card .user-name{
+
+.user-card .user-name {
     text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #49ff18, 0 0 30px #49FF18, 0 0 40px #49FF18, 0 0 55px #49FF18, 0 0 75px #49ff18;
 }
 
-.user-card .user-info i{
+.user-card .user-info i {
     width: 2rem;
     height: 2rem;
     line-height: 2rem;
 }
-.user-card .user-info span{
+
+.user-card .user-info span {
     line-height: 2rem;
 }
 

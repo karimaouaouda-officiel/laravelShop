@@ -12,8 +12,13 @@ class Order extends Model
     protected $fillable = [
         'user_id',
         'statut',
-        'product_id'
+        'product_id',
+        'order_date',
     ];
+
+    public function getOrderDateAttribute(){
+        return $this->order_date;
+    }
 
 
 

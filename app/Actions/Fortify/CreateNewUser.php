@@ -16,7 +16,7 @@ class CreateNewUser implements CreatesNewUsers
     /**
      * Validate and create a newly registered user.
      *
-     * @param  array  $input
+     * @param  Request  $input
      * @return \App\Models\User
      */
     public function create(Request $req)
@@ -28,16 +28,13 @@ class CreateNewUser implements CreatesNewUsers
             'password' => $this->passwordRules(),
             'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['accepted', 'required'] : '',
         ]);
+
         $input = $req->all();
 
         if($input['role'] == 'seller'){
             $req->validate([
                 'phone_number' => ['required'],
             ]);
-
-            if($validator->fails()){
-                return back()->withErrors($validator);
-            }
         }else{
             $input['phone_number'] = User::all()->count()+1;
         }

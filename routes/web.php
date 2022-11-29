@@ -16,7 +16,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
+
+Route::get('/aboutus' , function(){
+    return view('about');
+})->name('about');
+
+Route::get('/contactus' , function(){
+    return view('contact');
+})->name('contact');
 
 Route::middleware([
     'auth:sanctum',
@@ -38,5 +46,9 @@ Route::controller(ProductController::class)->group(function(){
     Route::post('/removeProduct' , 'delProduct')->name('remove');
 
     Route::get('/getProducts' , 'getProducts')->name('getProducts');
+
+    Route::get('/discover' , 'discover')->name('discover');
+
+    Route::post('/publish' , 'check')->name('check');
 
 });
