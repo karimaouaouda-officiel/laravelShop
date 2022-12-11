@@ -46,6 +46,10 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
+    public function getFullNameAttribute(){
+        return $this->first_name." ".$this->last_name;
+    }
+
     /**
      * The attributes that should be cast.
      *
@@ -76,7 +80,7 @@ class User extends Authenticatable
     }
 
     public function orders(){
-        return $this->hasMany(Order::class);
+        return $this->hasMany(OrderSource::class);
     }
 
     public function rates(){

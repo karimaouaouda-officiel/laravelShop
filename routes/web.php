@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -51,4 +53,17 @@ Route::controller(ProductController::class)->group(function(){
 
     Route::post('/publish' , 'check')->name('check');
 
+});
+
+
+Route::controller(OrderController::class)->group(function(){
+    Route::get('/makeorder' , 'makeOrder')->name('makeorder')->middleware('auth');
+    Route::post('/newORder' , 'newOrdre')->name('newOrder');
+    Route::post('addtoorder' , 'addToOrder')->name('addToOrder');
+});
+
+
+Route::middleware('auth')->controller(Controller::class)->group(function(){
+    Route::get('/messenger' , 'messenger');
+    Route::get('getEvent' , 'fire')->name('fire');
 });

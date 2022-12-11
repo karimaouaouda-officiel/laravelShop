@@ -10,19 +10,18 @@ class Order extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'order_id',
         'statut',
-        'product_id',
-        'order_date',
+        'product_id'
     ];
 
-    public function getOrderDateAttribute(){
+    public function getWaitTimeAttribute(){
         return $this->order_date;
     }
 
 
 
-    public function user(){
-        return $this->belongsTo(User::class);
+    public function order(){
+        return $this->belongsTo(OrderSource::class);
     }
 }

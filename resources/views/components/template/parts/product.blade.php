@@ -13,7 +13,7 @@
 
         <div class="w-100 d-flex align-items-center justify-content-center">
             @if(auth()->check())
-            <button type="button" id="{{$product->id}}" class="btn small addToCart btn-primary my-3 mx-t">
+            <button type="button" id="{{$product->id}}" data-product="{{json_encode($product)}}" class="btn small addToCart btn-primary my-3 mx-t">
                 <i class="fas fa-cart-shopping mx-2"></i>add to cart
             </button>
             <i class="fas fa-heart mx-2 text-secondary" style="font-size: 1.5rem;"></i>

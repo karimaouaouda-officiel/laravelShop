@@ -169,6 +169,28 @@ a {
     line-height: 2rem;
 }
 
+
+.cart-toggeler {
+    width: 3rem;
+    height: 3rem;
+    opacity: .7;
+    transition: .3s;
+    bottom: 3rem;
+    right: 3rem;
+    cursor: pointer;
+}
+.cart-toggeler .count::before{
+    content: attr(count);
+}
+
+.cart-toggeler .count{
+    top: -0.3rem;
+    right: -0.3rem;
+}
+.cart-toggeler:hover{
+    opacity: 1;
+    transform: scale(1.05);
+}
 @media only screen and (min-width : 992px) {
     .product-card {
         width: 300px;

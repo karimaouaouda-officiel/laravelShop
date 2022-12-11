@@ -1,4 +1,5 @@
 <x-template.guest>
+    <x-main.guest.navbar/>
 
     {{-- This is a comment from laravel --}}
     <div class="controle-fluid py-2">
