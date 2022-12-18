@@ -20,7 +20,7 @@ class MessageEvent implements ShouldBroadcast
      * @return void
      */
 
-     public $user;
+    public $user;
     public function __construct($user)
     {
         $this->user = $user;
@@ -33,6 +33,10 @@ class MessageEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('MessageChannel');
+        return ['MessageChannel'];
+    }
+    public function broadcastAs()
+    {
+        return 'MessageEvent';
     }
 }
